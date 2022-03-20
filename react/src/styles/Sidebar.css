@@ -1,0 +1,168 @@
+.sideMenu {
+  z-index: 2000;
+  box-sizing: border-box;
+  flex: 0 0 10vw;
+  min-width: max(300px,20%);
+  background-color: #d3d3d3;
+}
+.sideMenu:not(.backAnim){
+  animation: SideMenuAnim 0.2s ease-out;
+}
+.sideMenu.backAnim{
+  animation: ReverseSideMenuAnim 0.2s ease-out;
+}
+.sideMenu_hidden.backAnim{
+  position: absolute;
+  right: 0;
+}
+.sideMenu .iconsCont {
+  padding: 0 1.5vw;
+  background-color: #292929;
+  height: 8%;
+  display: flex;
+  justify-content: space-between;
+}
+.sideMenu_hidden{
+  box-sizing: border-box;
+  height: 100%;
+  background-color: #292929;
+}
+.sideMenu_hidden .toggleMenuSVG{
+  padding: 16px 25px;
+}
+
+.sideContent {
+  z-index: 6;
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 5px;
+  height: 90%;
+  width: 95%;
+  margin: 3% 2.5%;
+}
+
+.toggleMenuSVG {
+  cursor: pointer;
+  flex: 0, 0, 1vh/1vh;
+  padding: 1em 3em 1em 2em;
+  height: 5vh;
+}
+.toggleMenuSVG:hover {
+  filter: invert(50%) saturate(2878%);
+}
+
+.iconsCont * {
+  width: 42px;
+  cursor: pointer;
+}
+.iconsCont *:hover,
+.iconsCont .active {
+  filter: invert(27%) saturate(2878%) sepia(2);
+}
+
+#main {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+@media only screen and (max-width: 800px) {
+  .sideContent{
+    border-radius: 5px;
+    width: calc(100% - 8px);
+    margin: 2.5% 4px 0% 4px;
+  }
+  .sideMenu_hidden{
+    visibility: hidden;
+    position: absolute;
+  }
+  .sideMenu_hidden{
+    position: static;
+  }
+  .sideMenu{
+
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-width: 0%;
+
+  }
+  .sideMenu:not(.backAnim){
+    animation: MobSideMenuAnim 0.2s;
+  }
+  .sideMenu.backAnim{
+    animation: MobReverseSideMenuAnim 0.2s;
+  }
+  .sideMenu .iconsCont{
+    display:block;
+    position: relative;
+  }
+  .sideMenu .iconsCont >*{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .sideMenu .iconsCont .menuSVG{
+    left:12px;
+  }
+  .sideMenu .iconsCont .chatSVG{
+    right:100px;
+  }
+  .sideMenu .iconsCont .statsSVG{
+    right: 12px;
+  }
+  .sideMenu .iconsCont >*:not(:first-child){
+    float: right;
+  }
+  .sideMenu_hidden .toggleMenuSVG{
+    visibility: visible;
+    position: absolute;
+    margin:0;
+    padding: 0;
+    top: 9px;
+    left:12px;
+    visibility: visible;
+    min-width: 42px;
+    max-width: 42px;
+    min-height: 42px;
+    max-height: 42px;
+  }
+ 
+}
+@keyframes SideMenuAnim {
+  0%{
+    min-width: 0%;
+  }
+  100%{
+    min-width: max(300px,20%);
+  }
+}
+@keyframes ReverseSideMenuAnim {
+  0%{
+    transform: translateX(0px);
+    width: max(300px,20%);
+  }
+  100%{
+    transform: translateX(200px);
+    min-width: 0%;
+    width: 0%;
+  }
+}
+@keyframes MobSideMenuAnim {
+  0%{
+    left: -50px;
+    width: 0%;
+  }
+  100%{
+    left:0;
+    width: 100%;
+  }
+}
+@keyframes MobReverseSideMenuAnim {
+  0%{
+    width: 100%;
+  }
+  100%{
+    width: 0%;
+  }
+}

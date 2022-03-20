@@ -1,0 +1,175 @@
+.pie{
+    width:133px;
+    aspect-ratio: 1;
+    position: relative;
+    display: inline-grid;
+    place-content: center;
+    margin: 10px;
+}
+.pie:not(.twoColors)::before{
+    background:conic-gradient(var(--color) calc(var(--percentage)*1%), #0000 0);
+}
+.pie.twoColors::before{
+    /* background: conic-gradient(from 90deg, var(--color1) 0%, var(--color) calc(var(--percentage)*1%), #0000 0);*/
+    background: conic-gradient(from 90deg, var(--color1) 0%, var(--color2) calc(var(--percentage)*1%), rgba(221,255,54,0), rgba(255,255,255,0) 0);
+ }
+.pie::before{
+    --thickness:10px;
+    aspect-ratio:1;
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    inset: 0;
+    
+    -webkit-mask: radial-gradient(farthest-side,#0000 calc(99% - var(--thickness)),#000 calc(100% - var(--thickness)));
+     mask:radial-gradient(farthest-side,#0000 calc(99% - var(--thickness)),#000 calc(100% - var(--thickness)));
+    transform: rotate(180deg);
+}
+
+
+.statistics{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 100%;
+    background-color: #161616;
+    color: white;
+}
+.statistics .left{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.statistics .right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.statistics .chart{
+    width: min(45vw ,640px);
+    height: 348px;
+    border-radius: 43px;
+    border: 1px solid #ffffff;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.statistics .middle{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.statistics .chart .stats{
+    display: flex;
+    justify-content: center;
+}
+.statistics .graph{
+    text-align: center;
+    background:linear-gradient(135deg, #8b8b8b 0%, #3b3a3a 52%, #2e2e2e 100%);
+    height: 200px;
+    width: 200px;
+    border-radius:41px;
+}
+.statistics .graph > *{
+    margin: 0;
+    padding: 0;
+}
+.statistics .graph p{
+    margin: 12px 0 0 0;
+    font-weight: 500;
+    font-size: 24px;
+}
+.statistics .graph .pie{
+    margin: 0 0 25px 0;
+}
+
+.statistics .header{
+    margin: 6px 0 0 0;
+    text-indent: 8%;
+    font-size: 48px;
+    font-weight: 500;
+}
+
+.statistics .wins,
+.statistics .games{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 28px;
+    font-weight: 500;
+}
+.statistics .games{
+    margin: 0 15px 0;
+}
+.statistics .wins p,
+.statistics .games p{
+ margin: 12px 0 0 0;
+}
+@media only screen and (max-width: 1280px) {
+    .statistics{
+        overflow: scroll;
+        padding-top: 24px;
+        display: block;
+    }
+    .statistics::-webkit-scrollbar{
+        display: none;
+    }
+    .statistics .left,
+    .statistics .right{
+        width: 100%;
+        display: block;
+    }
+    .statistics .chart{
+        width: calc(60% - 20px);
+        height: 220px;
+        margin: 30px 10px 30px 10px;
+    }
+    .statistics .chart:first-of-type{
+        margin-top: 0;
+    }
+    .statistics .chart .header{
+        font-size: 2em;
+    }
+    .statistics .chart .stats >*{
+        font-size: 1.5em;
+    }
+    .statistics .graph{
+        width: 160px;
+        height: 160px;
+        font-size: 1.3;
+        margin-bottom: 20px;
+    }
+    .statistics .graph p{
+        font-size: 1.2em;
+    }
+    .statistics .graph .pie{
+        margin: 4px 0 0 5px;
+        width: 100px;
+    }
+}
+@media only screen and (max-width: 800px) {
+
+    .statistics .chart{
+        width: calc(100% - 20px);
+        height: 220px;
+        margin: 30px 10px 30px 10px;
+    }
+}
+@media only screen and (min-width: 700px) and (max-width: 1000px) {
+
+    .statistics .chart{
+        width: calc(80% - 20px);
+        height: 220px;
+        margin: 30px 10px 30px 10px;
+    }
+    .statistics .left >*,
+    .statistics .right >*{
+        transform: translateX(10%);
+    }
+}
+@media only screen and (min-width: 1000px) and (max-width: 1280px) {
+    .statistics .left >*,
+    .statistics .right >*{
+        transform: translateX(35%);
+    }
+}

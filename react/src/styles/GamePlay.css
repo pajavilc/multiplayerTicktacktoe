@@ -1,0 +1,56 @@
+.gameField{
+    height: 100%;
+    width: 100%;
+    background-color: rgb(29, 29, 29);
+    color: white;
+}
+.gameField .game{
+    margin-top: 4%;
+    width: 100%;
+    height: 80%;
+}
+.gameField .table{
+
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: repeat(3,auto);
+
+}
+.gameField .table > *{
+    font-size: 3em;
+}
+.gameField p.highlight{
+    color: rgb(217, 218, 176);
+}
+.gameField .td{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid white;
+    width: 150px;
+    height: 150px;
+}
+.gameField .td.active{
+    cursor: pointer;
+}
+.gameField .td.active:hover{
+    background-color: rgb(53, 53, 53);
+}
+.gameField .score{
+    font-size:x-large;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+@media only screen and (max-width: 800px) {
+    .gameField .td{
+        width:110px;
+        height: 110px;
+    }
+}

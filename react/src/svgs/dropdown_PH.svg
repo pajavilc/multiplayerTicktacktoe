@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="30px" height="20px" viewBox="0 0 30 20" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <path d="M0 0L29.5966 0L29.5966 19.3045L0 19.3045L0 0Z" id="path_1" />
+    <clipPath id="mask_1">
+      <use xlink:href="#path_1" />
+    </clipPath>
+  </defs>
+  <g id="dropdown_PH">
+    <path d="M0 0L29.5966 0L29.5966 19.3045L0 19.3045L0 0Z" id="Background" fill="none" fill-rule="evenodd" stroke="none" />
+    <g clip-path="url(#mask_1)">
+      <g id="layer1">
+        <path d="M0 0.0837218L2.49684 0.014009L14.8447 15.2838L26.9643 0L29.5966 0.0837228L29.5966 0.0837228L14.8447 19.3045L0 0.0837218Z" id="rect1341" fill="#000000" fill-rule="evenodd" stroke="none" />
+      </g>
+    </g>
+  </g>
+</svg>

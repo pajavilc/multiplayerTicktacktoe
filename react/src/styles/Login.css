@@ -1,0 +1,114 @@
+.loginHolder {
+  height: max-content;
+  z-index: 2000;
+  width: clamp(280px, 30vw, 400px);
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0 5% 6% 5%;
+  animation: LoginAnim 0.1s ease-out;
+}
+.loginHolder .username {
+  padding-top: 6%;
+  padding-bottom: 4%;
+}
+.password {
+  padding: 0;
+  margin: 3% 0 5% 0;
+}
+a.formClickable {
+  display: block;
+  padding: 3% 0 0 60%;
+  font-weight: 500;
+  font-size: smaller;
+  color: #000000;
+}
+a.formClickable:hover {
+  filter: invert(27%) saturate(2878%) sepia(2);
+}
+
+.loginHolder input {
+  border: 1.5px solid rgb(155, 155, 155);
+  box-shadow: 0 0 3px 0.1px rgb(155, 155, 155);
+  border-radius: 5px;
+
+  width: 100%;
+  text-indent: 5%;
+  padding: 3% 0 3% 0;
+}
+
+.loginHolder input[type="submit"] {
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+  height: max(30px, 4vh);
+  color: black;
+  font-weight: 700;
+  border-radius: 6px;
+  background-color: #9aae60;
+  margin: 3% 0 5% 0;
+}
+.loginHolder input[type="submit"]:hover {
+  background-color: #b1c76e;
+  cursor: pointer;
+}
+.loginHolder input[type="submit"]:active {
+  background-color: #bfd876;
+}
+.loginHolder input[type="text"],
+.loginHolder input[type="password"]{
+  font-size: 16px;
+}
+.loginHolder .icons {
+  height: clamp(20px, 10vw, 40px);
+}
+.loginHolder .icons * {
+  height: 100%;
+  margin-right: 8%;
+  cursor: pointer;
+}
+.loginHolder .icons *:hover,
+.closePoppup:hover {
+  filter: invert(27%) saturate(2878%) sepia(2);
+}
+
+.closePoppup {
+  position: absolute;
+  right: -1vh;
+  top: -1vh;
+  width: 2vh;
+  cursor: pointer;
+}
+
+.alignDown {
+  font-size: smaller;
+  position: absolute;
+  bottom: 1px;
+  right: 4%;
+}
+.alignDown p {
+  display: inline-block;
+  margin-right: 0.5em;
+}
+
+.alignDown a {
+  font-weight: 600;
+  color: #000000;
+  display: inline-block;
+}
+.alignDown a:hover {
+  filter: invert(27%) saturate(2878%) sepia(2);
+}
+
+@keyframes LoginAnim {
+  0%{
+    width: 0%;
+  }
+  100%{
+    width: clamp(280px, 30vw, 400px);
+  }
+}

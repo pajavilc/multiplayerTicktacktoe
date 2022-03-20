@@ -1,0 +1,76 @@
+.continue{
+    z-index: 9998;
+    background-color:rgba(0,0,0,0.96);
+    width: max(30vw, 500px);
+    height: 35%;
+}
+.continue.center{
+    border: 1px solid #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.continue .status{
+    width: fit-content;
+    padding: 2% 2%;
+    margin: 20px 0 0px 20px;
+    border: 1px solid #ffffff;
+    color: white;
+
+}
+.continue .status.win{
+    background-color: rgba(122, 250, 110, 0.29);
+}
+.continue .status.lose{
+    background-color:  rgba(248, 146, 146, 0.37);
+}
+.continue .status.tie{
+    background-color: grey;
+}
+.continue .userScore{
+    color: white;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-evenly;
+
+}
+.continue .buttons{
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 30px;
+}
+.continue .buttons > * {
+    text-align: center;
+    width: 25%;
+} 
+.continue .continueButton{
+    background-color: rgba(150,255,140,0.29);
+    color: white;
+    cursor: pointer;
+    padding: 12px 12px;
+}
+.continue .continueButton:hover{
+    background-color: rgba(187, 255, 181, 0.29);
+}
+.continue .continueButton:active{
+    background-color: rgba(187, 255, 180, 0.29);
+}
+.continue .exitButton{
+    background-color: rgba(91,90,90,0.29);;
+    color: white;
+    cursor: pointer;
+    padding: 12px 12px;
+}
+.continue .exitButton:hover{
+    background-color: rgba(133, 133, 133, 0.29);;
+}
+.continue .exitButton:active{
+    background-color: rgba(143, 143, 143, 0.29);;;
+}
+
+@media only screen and (max-width: 800px) {
+    .continue{
+        width: max(30vw, 300px);
+    }
+}

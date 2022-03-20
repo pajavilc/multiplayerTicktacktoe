@@ -1,0 +1,37 @@
+.loginHolder.leave button:first-of-type{
+    padding: 0;
+    text-align: center;
+    width: 30%;
+    height: max(30px, 4vh);
+    color: black;
+    font-weight: 700;
+    border-radius: 6px;
+    background-color: #9B0606;
+    margin: 3% 12.25% 0 0;
+    cursor: pointer;
+}
+.loginHolder.leave button:first-of-type:hover{
+    background-color: #bd0202;
+}
+.loginHolder.leave button:first-of-type:active{
+    background-color: #fa0202;
+}
+.loginHolder.leave button:last-of-type{
+    padding: 0;
+    cursor: pointer;
+    text-align: center;
+    width: 45%;
+    height: max(30px, 4vh);
+    color: black;
+    font-weight: 700;
+    border-radius: 6px;
+    background-color: #aac069;
+    margin: 3% 12.25% 0 0;
+}
+.loginHolder.leave button:last-of-type:hover{
+    background-color: #bfd874;
+}
+.loginHolder.leave button:last-of-type:hover{
+    background-color: #dcfa81;
+}
+

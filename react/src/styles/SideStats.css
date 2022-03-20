@@ -1,0 +1,64 @@
+.notInGame{
+    font-size: 1.1em;
+    padding: 12px 0 0 0;
+    text-indent: 30px;
+}
+.sideStats{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.sideStats p{
+    margin: -10% 0 0 0;
+    font-weight: 500;
+    font-size: 1.5em;
+    align-self: center;
+}
+.sideStats .player{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: 90%;
+    background-color:  #bdbdbd;
+    border-radius: 12px;
+    margin: 0 5% 12px 5%;
+}
+.sideStats .header{
+    margin-top: 12px;
+}
+.sideStats .header,
+.sideStats .graph{
+    align-self: center;
+}
+.sideStats .games{
+    text-indent: 10%;
+    margin: 15px 0 15px 0;
+}
+.sideStats .graph{
+    margin-bottom: 15px;
+}
+
+
+
+.sideStats .graph{
+    color: white;
+    text-align: center;
+    background:linear-gradient(135deg, #8b8b8b 0%, #3b3a3a 52%, #2e2e2e 100%);
+    height: 200px;
+    width: 200px;
+    border-radius:41px;
+}
+.sideStats .graph > *{
+    margin: 0;
+    padding: 0;
+}
+.sideStats .graph p{
+    margin: 12px 0 0 0;
+    font-weight: 500;
+    font-size: 24px;
+}
+.sideStats .graph .pie{
+    margin: 0 0 25px 0;
+}

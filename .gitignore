@@ -1,0 +1,7 @@
+.vscode/*
+!.vscode/launch.json
+server/node_modules
+server/.env
+react/build/*
+server/build/*
+node_modules

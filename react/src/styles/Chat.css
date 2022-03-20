@@ -1,0 +1,142 @@
+.messages{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
+.messages .submitForm{
+    height: 5%;
+    width: 100%;
+}
+.messages .submitForm .textHolder{
+    width: 80%;
+    color: white;
+}
+
+.messages .submitForm .middle{
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+.messages .messagesHolder{
+    height: 95%;
+    margin: 12px 6% 0px 6%;
+    overflow: scroll;
+}
+
+.messages .messagesHolder::-webkit-scrollbar{
+    display: none;
+}
+.messages .message{
+    width: 100%;
+    display: block;
+    position: relative;
+    margin: 0 0 3% 0;
+}
+.messages .message.systemMessage{
+    color: red;
+}
+.messages .message > * {
+    display:  inline-block;
+}
+.messages .message{
+    display: flex;
+    flex-direction: column;
+}
+.messages .message.isUser{
+    align-items: flex-end;
+}
+
+.messages .messageContent{
+    width: 80%;
+    padding: 0 0 0 12px;
+}
+
+.messages .message.isUser .messageContent{
+    padding: 0 12px 0 0;
+    text-align: right;
+}
+
+.messages .submitForm > *{
+    color: white;
+    min-width: 0;
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+.messages .submitForm .textHolder{
+    border: none;
+    background-color:  #1d1d1d;
+    text-indent: 5%;
+    border-radius: 0 0 0 8px;
+}
+.messages .submitForm .textHolder:focus{
+    outline: none;
+}
+.messages .submitForm .textHolder::placeholder{
+    text-indent: 5%;
+}
+.messages .submitForm .button{
+    cursor: pointer;
+    border: none;
+    border-radius: 0px 0px 8px 0;
+    background-color: #403f3f;
+}
+.messages .submitForm .button:not(.disable):hover{
+    background-color: #6b6b6b;
+}
+.messages .submitForm .button.disable{
+    cursor:default;
+    color: darkgrey;
+}
+.messages .submitForm .button img{
+    position: absolute;
+    visibility: hidden;
+}
+
+@media only screen and (max-width: 800px) {
+    .messages .submitForm {
+        display: inline-block;
+        position: relative;
+    }
+    .messages .submitForm .textHolder{
+        position: relative;
+        bottom: 5px;
+        height: 95%;
+        width: calc(100% - 45px);
+    }
+    .messages .submitForm .button{
+        background-color: #0000;
+    }
+    .messages .submitForm .button p{
+        visibility: hidden;
+        position: absolute;
+    }
+    .messages .submitForm .button img{
+        position: static;
+        visibility: visible;
+        display: inline-block;
+        width: 29px;
+        padding: 0;
+    }
+    .messages .submitForm .textHolder{
+        border-radius: 12px;
+    }
+    .messages .submitForm .middle{
+        position: absolute;
+        height: 100%;
+        width: min(70%, 600px);
+        left:50%;
+        transform: translateX(-50%);
+        transition: width 0.11s ease-in;
+    }
+
+    .messages .submitForm .middle:focus-within{
+        width: 95%;
+    }
+    .messages .submitForm .middle input[type="text"]{
+        font-size: 16px;
+    }
+}
+
+

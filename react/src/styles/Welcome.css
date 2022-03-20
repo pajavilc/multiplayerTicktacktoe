@@ -1,0 +1,166 @@
+.welcome{
+    height: 100%;
+    color: white;
+}
+.welcome *{
+    margin: 0;
+}
+.welcome .game{
+    height: 75%;
+    background: #131212;
+    position: relative;
+}
+.welcome .links{
+    height: 25%;
+    overflow: hidden;
+}
+.welcome  .game h1{
+    font-weight: 500;
+    font-size: 2em;
+    text-align: center;
+    padding: 12px 0 0 0;
+}
+.welcome .game .buttons{
+    z-index: 1000;
+    position: absolute;
+    top: 50%;
+    left: 50px;
+    transform: translateY(-50%);
+}
+.welcome .game .buttons .button{
+    display: block;
+    background-color: white;
+    border: 2px solid #a5a5a5;
+    border-radius: 5px;
+    color: #181818;
+    text-align: center;
+    padding: 24px 12px;
+    margin: 0 0 5px 0;
+    cursor: pointer;
+}
+.welcome .game .button:hover{
+    background-color: #757575;
+    color:  #FFFF;
+}
+.welcome .game .button:active{
+    background-color: white;
+}
+
+
+.welcome .game img{
+    position: absolute;
+    width: max(300px,min(40%,462px));
+    top: 50%;
+    right: max(30px,calc(35% - 300px));
+    transform: translateY(-50%);
+}
+.welcome .links > *{
+    box-sizing: border-box;
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    border: 1px solid rgba(128,128,128);
+}
+.welcome .links .left{
+    background-color: #323232;
+    border-right: none;
+}
+.welcome .links .right{
+    vertical-align: top;
+    background-color: 	#28282B;
+}
+.welcome .links h2{
+ margin: 6px 0 0 0;   
+}
+.welcome .text{
+    z-index: 5;
+    position: absolute;
+    top: 45%;
+    left: 30px;
+    transform: translateY(-50%);
+}
+.welcome .text p{
+    font-size: 1.4em;
+    padding: 0 0 0 0px;
+}
+.welcome .text p:first-of-type{
+    margin: 0 0 24px 0;
+}
+.welcome .text bold{
+    font-weight: 600;
+    cursor: pointer;
+}
+.welcome .text bold::after{
+    display: inline-block;
+    content: url('../svgs/loginIcon.svg');
+    transform: scale(0.7)  translateY(50%) translateX(3px);
+}
+.welcome .text bold:hover{
+    color: rgb(211, 211, 211);
+}
+.welcome .text bold:hover::after{
+    filter: brightness(0.8);
+}
+.welcome .text bold:active{
+    color: rgb(168, 168, 168);
+}
+.welcome .text bold:active::after{
+    filter: brightness(0.5);
+}
+.welcome a{
+    color: white;
+    text-decoration: none;
+}
+
+.welcome .game .text bold{
+ font-weight: 800;       
+}
+
+@media only screen and (max-width: 800px) {
+
+    .welcome{
+        overflow-y:scroll;
+    }
+    .welcome .game h1{
+        font-size: 1.8em;
+    }
+    .welcome .game img{
+
+    top: auto;
+    right: auto;
+    bottom: 30px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 250px;
+    }
+
+    .welcome .game .text,
+    .welcome .game .buttons{
+        top: max(170px,35%);
+        font-size: 0.8em;
+    }
+    .welcome .game .buttons .button{
+        padding: 16px 12px;
+    }
+    .welcome .game .text p:first-of-type{
+margin: 0 0 50px 0;
+    }
+    .welcome .game .text:first-of-type bold::before{
+        content: "\a";
+        white-space: pre;
+    }
+    .welcome .game .text bold::after{
+        position: absolute;
+        transform: scale(0.5) translateY(-50%) translateX(-10px);
+    }
+    .welcome .links{
+        display: block;
+        height: fit-content;
+    }
+    .welcome .links >*{
+        width: 100%;
+        height: 200px;
+    }
+
+}

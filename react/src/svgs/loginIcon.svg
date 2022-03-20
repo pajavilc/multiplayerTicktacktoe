@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="45px" height="46px" viewBox="0 0 45 46" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <path d="M0 0L42.4396 0L42.4396 43.0402L0 43.0402L0 0Z" id="path_1" />
+    <clipPath id="mask_1">
+      <use xlink:href="#path_1" />
+    </clipPath>
+  </defs>
+  <g id="loginIcon" transform="translate(1 1)">
+    <path d="M0 0L42.4396 0L42.4396 43.0402L0 43.0402L0 0Z" id="Background" fill="none" fill-rule="evenodd" stroke="none" />
+    <g clip-path="url(#mask_1)">
+      <g id="layer1" transform="translate(0.5727539 0.7260742)">
+        <path d="M14.7881 11.4607L14.7881 5.79071C14.7881 1.65929 15.5097 0 18.4574 0L18.4574 0L37.4712 0C40.5409 0 41.1405 1.60158 41.1405 5.79071L41.1405 35.7971C41.1405 40.6788 40.3579 41.5878 37.4712 41.5878L18.4574 41.5878C15.7537 41.5878 14.7881 39.8708 14.7881 35.7971L14.7881 28.6331" id="rect2682" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+        <path d="M0 20.1335L20.1501 20.0851L29.7524 20.0565L22.646 14.48L29.7524 20.0565L22.2342 26.2377L29.7524 20.0565L20.1501 20.0851L0 20.1335Z" id="rect3173" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="1.6" stroke-linejoin="round" />
+      </g>
+    </g>
+  </g>
+</svg>
