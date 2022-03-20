@@ -1,7 +1,7 @@
-#Ticktacktoe Server
+# Ticktacktoe Server
 > An online ticktacktoe game. Live demo [_here_](http://tttproj.ddns.net/).
 
-##Table of Contents
+## Table of Contents
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
@@ -11,12 +11,12 @@
 * [Acknowledgements](#acknowledgements)
 * [Contact](#contact)
 
-##General information
+## general information
 sadasd
 >A multiplayer game running on react + node.js + mysql.
 >This my personal project made for educational purposes.
 
-##Technologies Used
+## technologies Used
 - Node.js - 16.14.1
 - mariadb - 10.5
 - express - 4.17.2
@@ -26,16 +26,16 @@ sadasd
 - redux - 4.1.2
 - ws
 
-## Features
+## features
 - 1 v 1 ticktacktoe
 - spectator mode
 - chat
 - statistics
 
-##Screnshots
+## screenshots
 To be added
 
-##Setup
+## setup
 You need to install NodeJS from [_here_](https://nodejs.org/en/download/). Next you have to create .env in server and include all the variables from .env.example
 	
   Example:
@@ -55,12 +55,12 @@ You need to install NodeJS from [_here_](https://nodejs.org/en/download/). Next 
 
 Next you have to install the modules, build react app and move it to server folder and run the server. You can do that by running 'npm run install-modules', 'npm run build-react' and 'npm run-server' (or you can use 'npm run initial') from base location.
 
-## Project Status
+## project Status
 Project is: _in progress_
 
-## Acknowledgements
+## acknowledgements
 This project is using icons from [_freeiconshop.com_](https://freeiconshop.com/)
 Many thanks to [_Web Dev Simplified_](https://www.youtube.com/c/WebDevSimplified)
 
-##Contact
+## contact
 Created by [pajavilc](https://github.com/pajavilc) - feel free to contact me!
