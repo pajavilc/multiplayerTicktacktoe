@@ -14,7 +14,7 @@ async function Register(username, password, mail) {
   return new Promise((resolve, reject) => {
     pool.getConnection((err, connection) => {
       const searchForUser = `select id from users where username='${username}' ${mail !== null ? `or mail='${mail}` : ''}`;
-      const createUser = `INSERT INTO users(username, mail, passPhrase) VALUES ('${username}', ${(mail !== null ? `${mail},` : '')} '${password}');`;
+      const createUser = `INSERT INTO users(username, ${(mail !== null ? "mail," : "")} passPhrase) VALUES ('${username}', ${(mail !== null ? `${mail},` : '')} '${password}');`;
       connection.query(searchForUser, (err, result) => {
         if (err) {
           connection.release();

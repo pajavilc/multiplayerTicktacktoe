@@ -10,7 +10,7 @@ router.post('/register', async (req, res) => {
     const salt = await bcrypt.genSalt();
     const hpassword = await bcrypt.hash(req.body.password, salt);
     const mail = req.body.mail;
-    if (!mail.includes('@')) return res.status(400).send()
+    //if (!mail.includes('@')) return res.status(400).send()
     try {
       const response = await Register(req.body.username, hpassword, mail).catch((err) => {
         throw ("Database_error")
