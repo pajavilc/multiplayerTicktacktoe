@@ -2,6 +2,8 @@ class GameSession {
     constructor() {
         this.grid = Array(9).fill(-1)
         this.playerIds = [null, null];
+        //NOT_IN_GAME, WAITING_FOR_TOGGLE, IN_GAME
+        this.status = 'NOT_IN_GAME';
         this.playersWantToPlay = [true, true];
         this.score = [0, 0];
         this.playerTurn = 0;
@@ -50,7 +52,8 @@ class GameSession {
             this.score[this.playerTurn]++;
         }
         this.playerTurn = -1;
-        this.playersWantToPlay = [false, false]
+        this.playersWantToPlay = [false, false];
+        this.status = "WAITING_FOR_TOGGLE";
         return [status, _grid, _playerTurn, this.score];
 
     }
@@ -68,15 +71,14 @@ class GameSession {
 
 
     #continueGame() {
+        this.status = "IN_GAME";
         this.lastGameFirstPlayer = (this.lastGameFirstPlayer + 1) % 2;
         this.playerTurn = this.lastGameFirstPlayer;
         this.turnNo = 0;
         this.#clearGrid();
         return this.playerTurn;
     }
-    /*
-    0 full, 1 first pos, 2 second pos, 3 both
-    */
+    //0 full, 1 first pos, 2 second pos, 3 both
     canJoin() {
         let res = 0;
         if (this.playerIds[0] == null) res += 1;
@@ -101,6 +103,7 @@ class GameSession {
     }
 
     playerDisconnect(username) {
+        this.status = "NOT_IN_GAME";
         this.#clearAll();
         let index = this.playerIds.findIndex(name => name === username);
         if (index === -1) return false;
@@ -110,6 +113,9 @@ class GameSession {
     }
 
     playerCycle(username, arrPos) {
+        if (this.status != "IN_GAME") {
+            throw "Trying to play while not in game.";
+        }
         if (this.#checkUsernameIsPlayer(username) === -1) {
             return ['wrong player', 0];
         }
@@ -143,7 +149,8 @@ class GameSession {
     }
 
     startGame() {
-        if (this.lastGameFirstPlayer !== -1) throw 'cannot play'
+        if (this.lastGameFirstPlayer !== -1) throw 'cannot play';
+        this.status = "IN_GAME";
         this.playerTurn = Math.round(Math.random());
         this.turnNo = 0;
         this.lastGameFirstPlayer = this.playerTurn;
@@ -152,13 +159,16 @@ class GameSession {
     returnGrid() {
         return this.grid;
     }
+
     reconnect(username) {
-        let index = this.playerIds.findIndex(name => name === username);
-        this.playersWantToPlay[index] = true;
         let gamestarted = [false,]
-        if (this.playersWantToPlay[0] && this.playersWantToPlay[1]) {
-            let _playerTurn = this.#continueGame();
-            gamestarted = [true, _playerTurn];
+        let index = this.playerIds.findIndex(name => name === username);
+        if (this.status == "WAITING_FOR_TOGGLE") {
+            this.playersWantToPlay[index] = true;
+            if (this.playersWantToPlay[0] && this.playersWantToPlay[1]) {
+                let _playerTurn = this.#continueGame();
+                gamestarted = [true, _playerTurn];
+            }
         }
         return { score: this.score, gamestarted: gamestarted, grid: this.grid, toggledPlay: this.playersWantToPlay, playerNames: this.playerIds, nowPlaying: this.playerTurn };
     }

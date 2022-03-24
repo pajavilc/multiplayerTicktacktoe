@@ -10,9 +10,13 @@ const { subscribers, RequestIDEnum, ResponseIdEnum } = require('../game/response
 const { startClearIntervals, stopClearIntervals } = require('../game/clearIntervals');
 const mapUserToWebSocket = new Map();
 wss = new WebSocket.Server({ noServer: true });
+
+
 startIntervals(wss.clients);
-startClearIntervals()
+startClearIntervals();
 console.log("websocket server started...");
+
+
 wss.on("connection", (ws, request) => {
   ws.isAuth = true;
   ws.send(makeResponse(ResponseIdEnum.AUTH_REQUIRED, {}));
