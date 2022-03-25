@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux';
 import loginReducer from './reducers/loginReducer';
 import gameReducer from './reducers/gameReducer';
-import normalGameReducer from './reducers/normalGameReducer';
+import gameLobbyReducer from './reducers/gameLobbyReducer';
 import chatReducer from './reducers/chatReducer';
 
 
 const rootReducer = combineReducers({
     login: loginReducer,
-    games: gameReducer,
+    game: gameReducer,
     chat: chatReducer,
-    game: normalGameReducer
+    games: gameLobbyReducer
 })
 
 export default rootReducer;
