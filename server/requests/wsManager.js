@@ -4,9 +4,9 @@ const WebSocket = require("ws");
 const jwt = require("jsonwebtoken");
 const { proccessWsMessage } = require('../game/gameMaster')
 const { startIntervals, stopIntervals, show } = require('../game/heartbeat')
-const { makeResponse, parseResponse, sendGameContinue } = require("../game/responses");
+const { sendAuthRequired, sendReconnect, parseResponse, sendGameContinue } = require("../game/responses");
 const { returnInfos, reconnect } = require("../game/gameTemplateManager");
-const { subscribers, RequestIDEnum, ResponseIdEnum } = require('../game/responses');
+const { subscribers, RequestIDEnum } = require('../game/responses');
 const { startClearIntervals, stopClearIntervals } = require('../game/clearIntervals');
 const mapUserToWebSocket = new Map();
 wss = new WebSocket.Server({ noServer: true });
@@ -19,7 +19,7 @@ console.log("websocket server started...");
 
 wss.on("connection", (ws, request) => {
   ws.isAuth = true;
-  ws.send(makeResponse(ResponseIdEnum.AUTH_REQUIRED, {}));
+  sendAuthRequired(ws);
   ws.binaryType = "arraybuffer";
   ws.username;
   ws.position = -1;
@@ -34,7 +34,7 @@ wss.on("connection", (ws, request) => {
     if (response.requestID === RequestIDEnum.AUTH) {
       const x = authenticateUseUpgrade(response.data.bearer);
       if (x === false) {
-        ws.send(makeResponse(ResponseIdEnum.AUTH_FAILED, {}));
+        sendAuthRequired(ws);
         return;
       }
       ws.username = x.username;
@@ -45,7 +45,7 @@ wss.on("connection", (ws, request) => {
     }
 
     if (ws.isAuth === false) {
-      ws.send(makeResponse(ResponseIdEnum.AUTH_REQUIRED, {}));
+      sendAuthRequired(ws);
       return;
     }
 
@@ -108,15 +108,7 @@ function checkForDuplicateConnection(map, ws) {
         if (gamestarted[0]) {
           sendGameContinue(gameId, gamestarted[1]);
         }
-        ws.send(makeResponse(ResponseIdEnum.RECONNECT, {
-          gameId: gameId,
-          position: position,
-          grid: grid,
-          toggledPlay: toggledPlay,
-          playerNames: playerNames,
-          nowPlaying: nowPlaying,
-          score: score
-        }))
+        sendReconnect(ws, gameId, position, grid, toggledPlay, playerNames, nowPlaying, score)
       }
       else {
         for (let i = 2; i < subscribers[gameId].length; i++) {

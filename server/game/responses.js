@@ -26,7 +26,8 @@ const ResponseIdEnum = {
   STATS_LOADED: "STATS_LOADED",
   STATS_REQUEST_STATUS: "STATS_REQUEST_STATUS",
   DATABASE_ERROR: "DATABASE_ERROR",
-  RECONNECT: "RECONNECT"
+  RECONNECT: "RECONNECT",
+  PLAYER_LEFT_ERR: "PLAYER_LEFT_ERR"
 }
 Object.freeze(ResponseIdEnum);
 const RequestIDEnum = {
@@ -42,6 +43,7 @@ const RequestIDEnum = {
   AUTH: "AUTH"
 }
 Object.freeze(RequestIDEnum);
+
 function makeResponse(responseID, data = '') {
   return JSON.stringify({ responseID: responseID, data: data });
 }
@@ -49,6 +51,7 @@ function parseResponse(response) {
   return JSON.parse(response);
 }
 //#region Responses
+
 function sendPlayerTurn(gameId, username, turnData) {
   const response = makeResponse(ResponseIdEnum.PLAYED_TURN, {
     username: username,
@@ -56,6 +59,7 @@ function sendPlayerTurn(gameId, username, turnData) {
   });
   sendAll(gameId, response);
 }
+
 function sendPlayerToggled(gameId, indexOfYetNotAcceptedAccount) {
   const response = makeResponse(ResponseIdEnum.PLAYER_TOGGLED_PLAY, {
     waitingFor: indexOfYetNotAcceptedAccount
@@ -84,6 +88,7 @@ function sendPlayerJoined(gameId, ws, username, position) {
   });
   sendAllExcept(gameId, ws, response);
 }
+
 function sendEndOfGame(gameId, status, grid, lastPlayer, score) {
   const response = makeResponse(ResponseIdEnum.GAME_END, {
     score: score,
@@ -93,6 +98,7 @@ function sendEndOfGame(gameId, status, grid, lastPlayer, score) {
   })
   sendAll(gameId, response);
 }
+
 function sendSpectatorJoined(gameId, ws, username, gameInfo) {
   const data = {
     status: "succesful", gameInfo: {
@@ -113,12 +119,12 @@ function sendMessage(gameId, username, message) {
   sendAll(gameId, response);
 }
 
-function sendPlayerDisconnected(gameId, username, position) {
+function sendPlayerDisconnected(gameId, username, position, ws) {
   const response = makeResponse(ResponseIdEnum.PLAYER_DISCONNECTED, {
     username: username,
     position: position,
   });
-  sendAll(gameId, response);
+  sendAllExcept(gameId, ws, response);
 }
 
 function sendSpectatorDisconnected(gameId, ws, username) {
@@ -133,17 +139,26 @@ function sendStatus(status, data, ws) {
 
 async function sendPlayerData(ws) {
   const gameId = ws.gameId;
-  const playerData = await ReturnPlayersData(subscribers[gameId][0].id || -1, subscribers[gameId][1].id || -1).catch(err => {
+  if (subscribers[gameId][0] === null || subscribers[gameId][1] === null) {
+    ws.send(makeResponse(ResponseIdEnum.PLAYER_LEFT_ERR, {}));
+    return;
+  }
+
+  const playerData = await ReturnPlayersData(subscribers[gameId][0].id, subscribers[gameId][1].id).catch(err => {
     ws.send(makeResponse(ResponseIdEnum.DATABASE_ERROR), err);
     return;
-  })
+  });
+
   const response = makeResponse(ResponseIdEnum.STATS_LOADED, {
     wins: [playerData[0].winsTotal, playerData[1].winsTotal],
     games: [playerData[0].gamesTotal, playerData[1].gamesTotal]
-  })
+  });
+
   subscribers[ws.gameId][0].send(response);
   subscribers[ws.gameId][1].send(response);
+
 }
+
 async function sendPlayerDataToSpectator(ws) {
   const gameId = ws.gameId;
   const playerData = await ReturnPlayersData(subscribers[gameId][0].id, subscribers[gameId][1].id).catch(err => {
@@ -156,7 +171,82 @@ async function sendPlayerDataToSpectator(ws) {
   }))
 }
 
+async function sendPlayerInOtherGame(ws) {
+  ws.send(
+    makeResponse(ResponseIdEnum.JOIN_STATUS, { status: "PLAYER_IN_OTHER_GAME" })
+  );
+}
+async function sendJointStatus(ws, status, gameId, playerPosition, playerNames) {
+  ws.send(
+    makeResponse(ResponseIdEnum.JOIN_STATUS, { status: status, gameId: gameId, playerPosition: playerPosition, playerNames: playerNames })
+  );
+}
+async function sendJoinSpectatorStatus(ws, status) {
+  ws.send(
+    makeResponse(ResponseIdEnum.JOIN_SPECTATOR_STATUS, {
+      status: status,
+    })
+  );
+}
+async function sendPlayStatus(ws, status) {
+  ws.send(makeResponse(ResponseIdEnum.PLAY_STATUS, { status: status }));
+}
+
+async function sendDatabaseError(ws, err) {
+  ws.send(makeResponse(ResponseIdEnum.DATABASE_ERROR), err);
+}
+
+async function sendTogglePlayStatus(ws) {
+  ws.send(makeResponse(ResponseIdEnum.TOGGLE_PLAY_STATUS, {
+    data: 'WRONG_PLAYER'
+  }))
+}
+async function sendDisconnectSpectatorStatus(ws, status) {
+  ws.send(
+    makeResponse(ResponseIdEnum.DISCONNECT_STATUS, { status: status })
+  );
+}
+async function sendDisconnectStatus(ws, status) {
+  ws.send(
+    makeResponse(ResponseIdEnum.DISCONNECT_SPECTATOR_STATUS, { status: status })
+  );
+}
+
+async function sendCreateGameStatus(ws, status, gamedId, playerPosition) {
+  ws.send(
+    makeResponse(ResponseIdEnum.CREATE_GAME_STATUS, { status: status, gamedId: gamedId, playerPosition: playerPosition })
+  );
+}
+async function sendAuthRequired(ws) {
+  ws.send(makeResponse(ResponseIdEnum.AUTH_REQUIRED, {}));
+}
+async function sendReconnect(ws, gameId, position, grid, toggledPlay, playerNames, nowPlaying, score) {
+  ws.send(makeResponse(ResponseIdEnum.RECONNECT, {
+    gameId: gameId,
+    position: position,
+    grid: grid,
+    toggledPlay: toggledPlay,
+    playerNames: playerNames,
+    nowPlaying: nowPlaying,
+    score: score
+  }))
+}
+async function sendMessageStatus(ws, status) {
+  ws.send(
+    makeResponse(ResponseIdEnum.MESSAGGE_STATUS, { status: status })
+  );
+}
+
+
+
+
 //#endregion
+
+
+
+
+
+
 function sendAllExcept(gameId, ws, response) {
   let x = subscribers[gameId];
   for (let i = 0; i < subscribers[gameId].length; i++) {
@@ -178,13 +268,13 @@ function sendAll(gameId, response) {
 
 
 
+
 module.exports = {
   subscribers,
   RequestIDEnum,
   ResponseIdEnum,
-  //------------------------------------------------
-  makeResponse,
   parseResponse,
+  /*------------------------------------------------*/
   sendPlayerDisconnected,
   sendPlayerJoined,
   sendPlayerTurn,
@@ -197,5 +287,18 @@ module.exports = {
   sendGameContinue,
   sendPlayerData,
   sendStatus,
-  sendPlayerDataToSpectator
-};
+  sendPlayerDataToSpectator,
+  /*--------------------------------------------*/
+  sendPlayerInOtherGame,
+  sendJointStatus,
+  sendJoinSpectatorStatus,
+  sendPlayStatus,
+  sendDatabaseError,
+  sendTogglePlayStatus,
+  sendDisconnectSpectatorStatus,
+  sendDisconnectStatus,
+  sendCreateGameStatus,
+  sendMessageStatus,
+  sendAuthRequired,
+  sendReconnect
+}

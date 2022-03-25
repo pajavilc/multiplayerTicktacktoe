@@ -11,7 +11,7 @@ function Register({ onClose, onRegister }) {
     function submitRegisterForm(e) {
         e.preventDefault();
         RegisterAPI(username, password, /*mail*/null).then(() => {
-            alert('registered fine xd');
+            alert('Registered');
             onRegister();
         }).catch((err) => alert(err));
 

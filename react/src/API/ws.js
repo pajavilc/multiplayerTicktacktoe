@@ -81,18 +81,10 @@ function onMessageParse(ws, event, dispatch) {
             return;
         }
         case RequestIDEnum.DISCONNECT_STATUS: {
-            if (response.data.status !== "PLAYER_DISCONNECTED") {
-                alert(`Error ${response.data.status}`);
-                return
-            }
             dispatch(userLeave())
             return;
         }
         case RequestIDEnum.DISCONNECT_SPECTATOR_STATUS: {
-            if (response.data.status !== "SPECTATOR_DISCONNECTED") {
-                alert(`Error ${response.data.status}`);
-                return
-            }
             dispatch(userLeave())
             return
         }
@@ -101,9 +93,9 @@ function onMessageParse(ws, event, dispatch) {
 
             return
         }
-
-
-
+        case RequestIDEnum.PLAYER_LEFT_ERR: {
+            alert("ERR: PLAYER_ALREADY_LEFT");
+        }
         default: {
             return;
         }

@@ -1,7 +1,7 @@
 
 const subscribers = require("./responses");
 const { sendPlayerDisconnected, sendSpectatorDisconnected } = require('./responses')
-const { makeResponse, ResponseIdEnum } = require("../game/responses");
+const { sendAuthRequired, sendDisconnectStatus } = require("../game/responses");
 let interval;
 let interval2;
 let clients;
@@ -29,10 +29,7 @@ function startIntervals(_clients) {
                     subscribers[j][position] = null;
                     ws.position = -1;
                     ws.gameId = -1;
-
-                    ws.send(
-                        makeResponse(ResponseIdEnum.DISCONNECT_STATUS, { status: "PLAYER_DISCONNECTED" })
-                    );
+                    sendDisconnectStatus(ws, "PLAYER_DISCONNECTED")
                     sendPlayerDisconnected(j, username, position);
                 }
                 else {
@@ -50,7 +47,7 @@ function startIntervals(_clients) {
         for (let j = 0; j < clients.length; j++) {
             const ws = clients[j];
             ws.isAuth = false;
-            ws.send(makeResponse(ResponseIdEnum.AUTH_REQUIRED, {}));
+            sendAuthRequired(ws);
         }
     }, 30000)
 }
