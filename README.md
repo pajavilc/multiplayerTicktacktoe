@@ -13,7 +13,7 @@
 
 ## general information
 >A multiplayer ticktacktoe game running on react + node.js + mysql.
->This my personal project made for educational purposes.
+>This is my personal project made for educational purposes.
 
 ## features
 - 1 v 1 ticktacktoe
