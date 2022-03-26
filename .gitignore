@@ -5,3 +5,5 @@ server/.env
 react/build/*
 server/build/*
 node_modules
+server/ssl/*
+!server/ssl/.gitkeep

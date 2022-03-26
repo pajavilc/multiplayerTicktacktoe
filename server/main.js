@@ -1,20 +1,16 @@
 const express = require("express");
 const cors = require("cors");
-const jwt = require("jsonwebtoken");
 const path = require("path")
+const https = require('https');
+const http = require('http');
 const app = express();
 const dirname = __dirname;
-const { authenticateUser } = require("./requests/user");
-const port = process.env.PORT || 5000;
+const fs = require("fs")
 require("dotenv").config();
 
-app.use(
-  cors({
-    origin: "*"/*process.env.FRONTEND_ADDRESS*/,
-    methods: ["GET", "POST", "DELETE"],
-    credentials: true,
-  })
-);
+const node_env = process.env.NODE_ENV === 'development';
+const port = node_env ? process.env.PORT : process.env.SSLPORT;
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -33,12 +29,28 @@ app.get("/app/*", (req, res) => {
 
 
 //start
-const server = app.listen(port, '0.0.0.0', () => {
-  let host = server.address().address;
-  let port = server.address().port;
-  console.log(`Server started at: http://${host}:${port}`);
-});
+const server = node_env ? (
+  http.createServer(app).listen(port, '0.0.0.0', () => {
+    let host = server.address().address;
+    let port = server.address().port;
+    console.log(`Server started at: http://${host}:${port}`);
+  })
+)
+  : (
+    https.createServer({
+      key: fs.readFileSync(path.join(__dirname, 'ssl', 'privatekey.pem')),
+      cert: fs.readFileSync(path.join(__dirname, 'ssl', 'certificate.pem'))
+    }, app).listen(port, '0.0.0.0', () => {
+      let host = server.address().address;
+      let port = server.address().port;
+      console.log(`Server started at: https://${host}:${port}`);
+    })
+  )
 
+setTimeout(() => {
+  console.log("hi")
+}, 1000
+)
 server.on("upgrade", (request, socket, head) => {
   wss.handleUpgrade(request, socket, head, function (ws) {
     wss.emit("connection", ws, request);

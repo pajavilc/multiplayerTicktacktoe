@@ -13,7 +13,7 @@
 
 ## general information
 >A multiplayer ticktacktoe game running on react + node.js + mysql.
->This my personal project made for educational purposes.
+>This is my personal project made for educational purposes.
 
 ## features
 - 1 v 1 ticktacktoe
@@ -41,7 +41,7 @@
 - ws
 
 ## setup
-You need to install NodeJS from [_here_](https://nodejs.org/en/download/). Next you have to create .env in server and include all the variables from .env.example
+You need to install NodeJS from [_here_](https://nodejs.org/en/download/). Next you have to create .env in server and include all of the variables from .env.example
 	
   Example:
   
@@ -72,6 +72,8 @@ You need to install NodeJS from [_here_](https://nodejs.org/en/download/). Next 
 `- MAXNUMBEROFGAMES=12`
 
 Next you have to install the modules, build react app and move it to server folder and run the server. You can do that by running `'npm run install-modules'`, `'npm run build-react'` and `'npm run-server'` (or you can use `'npm run initial'`) from base location.
+
+> Note: Production build needs an ssl cert and private key included in ssl folder (+ `SSLPORT=` var in .env)
 
 ## project Status
 Project is: _in progress_
