@@ -1,5 +1,5 @@
 # Ticktacktoe Server
-> An online ticktacktoe game. Live demo [_here_](http://tttproj.ddns.net/).
+> An online ticktacktoe game. Live demo [_here_](https://tttproj.ddns.net/).
 
 ## Table of Contents
 * [General Info](#general-information)
