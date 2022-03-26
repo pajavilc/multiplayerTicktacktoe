@@ -9,7 +9,8 @@ const fs = require("fs")
 require("dotenv").config();
 
 const node_env = process.env.NODE_ENV === 'development';
-const port = node_env ? process.env.PORT : process.env.SSLPORT;
+const httpsPort = process.env.SSLPORT || -1;
+const httpPort = process.env.PORT;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -30,7 +31,7 @@ app.get("/app/*", (req, res) => {
 
 //start
 const server = node_env ? (
-  http.createServer(app).listen(port, '0.0.0.0', () => {
+  http.createServer(app).listen(httpPort, '0.0.0.0', () => {
     let host = server.address().address;
     let port = server.address().port;
     console.log(`Server started at: http://${host}:${port}`);
@@ -40,17 +41,21 @@ const server = node_env ? (
     https.createServer({
       key: fs.readFileSync(path.join(__dirname, 'ssl', 'privatekey.pem')),
       cert: fs.readFileSync(path.join(__dirname, 'ssl', 'certificate.pem'))
-    }, app).listen(port, '0.0.0.0', () => {
+    }, app).listen(httpsPort, '0.0.0.0', () => {
       let host = server.address().address;
       let port = server.address().port;
       console.log(`Server started at: https://${host}:${port}`);
     })
   )
 
-setTimeout(() => {
-  console.log("hi")
-}, 1000
-)
+if (!node_env) {
+  const redirectServer = http.createServer((req, res) => {
+    res.writeHead(301, { Location: `https://${req.headers.host}${req.url}` });
+    res.end();
+  });
+  redirectServer.listen(httpPort)
+}
+
 server.on("upgrade", (request, socket, head) => {
   wss.handleUpgrade(request, socket, head, function (ws) {
     wss.emit("connection", ws, request);
