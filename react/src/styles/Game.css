@@ -7,7 +7,7 @@
 .lobbyField {
   overflow: scroll;
   overflow-x: hidden;
-  height: 92%;
+  height: 93%;
   width: 100%;
 }
 
@@ -92,7 +92,7 @@
 }
 
 .lobbies_header {
-  height: 8%;
+  height: 60px;
   width: 100%;
   background-color: #d3d3d3;
   display: flex;
@@ -110,13 +110,13 @@
 }
 
 .lobbies_header .right {
-  width: 80%;
+  width: min(70% , 700px);
 }
 
 .lobbies_header .header2 {
   font-size: x-large;
   font-weight: 500;
-  margin: 0 15px 30% 15%;
+  margin: 0 40px 40px 20px;
 }
 
 .lobbies_header .filter,
@@ -215,16 +215,17 @@
   text-align: center;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 750px) {
   .lobbies_header{
     font-size: 0.7em;
+    height: 50px;
     text-align: center;
   }
-  .lobbies_header .left p{
+  .lobbies_header .left p:not(.noOfLobbies){
     font-size: 1.8em;
   }
   .lobbies_header .header2{
-    margin: 0 15px 30% 15%;
+    margin: 25px 15px 30% 15%;
   }
   .lobbies_header .noOfLobbies{
     width: fit-content;
@@ -271,4 +272,9 @@
   font-size: 1.8em;
   margin-bottom: 38px;
 }
+}
+@media only screen and (max-width: 339px){
+  .lobbies_header{
+    font-size: 0.55em;
+  }
 }

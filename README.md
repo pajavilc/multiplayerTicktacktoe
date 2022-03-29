@@ -41,37 +41,42 @@
 - ws
 
 ## setup
-You need to install NodeJS from [_here_](https://nodejs.org/en/download/). Next you have to create .env in server and include all of the variables from .env.example
+First, you need to [_install MySQL_](https://dev.mysql.com/doc/mysql-getting-started/en) and set it up. The file createTables.session.sql in the DATABASE folder contains two query commands with which you can create necessary database tables.
+
+You also need to install NodeJS from [_here_](https://nodejs.org/en/download/). 
+
+Next you have to create .env in server and include all of the variables from .env.example:
 	
   Example:
   
-`- PORT= 2500`
+```- PORT= 2500
 
-`- ACCESS_SECRET_TOKEN='longSequenceOfChars'`
+- ACCESS_SECRET_TOKEN='longSequenceOfChars'
 
 `- REFRESH_SECRET_TOKEN='longSequenceOfChars'`
 
-`- ACCESS_EXPIRATION_TIME='2h'`
+- ACCESS_EXPIRATION_TIME='2h'
 
-`- REFRESH_EXPIRATION_TIME='15d'`
+- REFRESH_EXPIRATION_TIME='15d'
 
-`- REFRESH_EXPIRATION_TIME_COOKIE=1296000`
+- REFRESH_EXPIRATION_TIME_COOKIE=1296000
 
-`- DB="name_of_database"`
+- DB="name_of_database"
 
-`- DBhost="database_host_address"`
+- DBhost="database_host_address"
 
-`- DBport=3306`
+- DBport=3306
 
-`- DBuser="user_name"`
+- DBuser="user_name"
 
-`- DBpassword= "password"`
+- DBpassword= "password"
 
-`- NODE_ENV= "development" || "production"`
+- NODE_ENV= "development" || "production"
 
-`- MAXNUMBEROFGAMES=12`
+- MAXNUMBEROFGAMES=12
+```
 
-Next you have to install the modules, build react app and move it to server folder and run the server. You can do that by running `'npm run install-modules'`, `'npm run build-react'` and `'npm run-server'` (or you can use `'npm run initial'`) from base location.
+Next you have to install the modules, build react app and move it to server folder and run the server. You can do that by running <code>npm&nbsp;run&nbsp;install-modules</code>, <code>npm&nbsp;run&nbsp;build-react</code> and <code>npm&nbsp;run&nbsp;run-server</code> (or you can use <code>npm&nbsp;run&nbsp;initial</code>) from base location.
 
 > Note: Production build needs an ssl cert and private key included in ssl folder (+ `SSLPORT=` var in .env)
 

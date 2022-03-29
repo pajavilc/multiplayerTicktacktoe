@@ -120,11 +120,12 @@ function GameLobby() {
         <div className="lobbies_header">
           <div className="left">
             <p className="header2">Lobbies</p>
-          </div>
-          <div className="right">
             <p className="noOfLobbies">
               {numberOfLobbies[0]}/{numberOfLobbies[1]} Open Positions
             </p>
+          </div>
+
+          <div className="right">
             <img className="filter_icon" src={filter} alt="" />
             <div className="filter">
               <div className="dropB">
