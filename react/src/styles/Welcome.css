@@ -116,6 +116,20 @@
 .welcome .game .text bold{
  font-weight: 800;       
 }
+.welcome .links p:not(:first-of-type){
+    margin: 0 0 33px 0;
+}
+.welcome .links a{
+    display: inline-block;
+    text-decoration: underline;
+}
+.welcome .links .left a{
+    margin-top: 10px;
+}
+.welcome .links a, 
+.welcome .links >* p:not(:first-of-type){
+    font-size: 1em;
+}
 
 @media only screen and (max-width: 800px) {
 
