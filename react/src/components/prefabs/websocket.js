@@ -9,8 +9,12 @@ function WsContext({ children }) {
     const dispatch = useDispatch();
     const username = useSelector(selectUsername);
     if (username === null) return <>{children}</>
-    const ws = new WebSocket((window.location.protocol === 'http' ? 'ws://' : 'wss://') + window.location.hostname);
+    let ws = new WebSocket((window.location.protocol === 'http' ? 'ws://' : 'wss://') + window.location.hostname);
 
+    ws.onclose = () => {
+        ws = null;
+        setTimeout(() => { ws = new WebSocket((window.location.protocol === 'http' ? 'ws://' : 'wss://') + window.location.hostname) }, 5000);
+    }
     ws.onmessage = (event) => {
         onMessageParse(ws, event, dispatch);
     }
